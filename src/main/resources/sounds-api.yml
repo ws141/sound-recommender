@@ -1,0 +1,158 @@
+openapi: 3.0.0
+info:
+  title: Sound recommender
+  description: >-
+    **The purpose of this work sample is for you to show case your strengths as
+    a developer, focus on the topics you think are most important or fun (i.e.
+    testing, databases, api design, security etc). Chose the language/framework
+    you are most comfortable with.**
+
+
+    In this work sample we want you to create an API to manage a sound library
+    and the end-goal is to be able to recommend sounds based on some input.
+
+
+    To accomplish this we need to:
+
+
+    - Create sounds
+
+    - List sounds
+
+    - Create collection of sounds (aka playlists)
+
+    - Get recommendation of sounds based on input (i.e. a playlist)
+        - If you run out of time it's ok if this end-point returns a random sound, preferrably not the same every time
+
+    The API in this collection includes these four endpoints, feel free to
+    modify or add more, keep in mind that we will run the tests included in this
+    Postman collection to verify your work:
+
+
+    - POST `/admin/sounds`
+
+    - GET `/sounds`
+
+    - POST `/playlists`
+
+    - GET `/sounds/recommended`
+        
+
+    We would also like to see you include **one more end-point of your choice**
+    that you think would be relevant for this system.
+
+
+    Your solution should fulfill the functional requirements, we do not expect
+    your work sample to be a production ready product.
+
+
+    Keep in mind that we aim to run your code and use this Postman collection to
+    test it. We might need some instructions to get everything up and running 😉
+
+
+    ## **How to use this postman collection**
+
+
+    **Step 1:** Check out the requests' documentation to learn more about -
+
+
+    - what each request is meant to do.
+
+    - the tests we've added against each one.
+        
+
+    **Step 2:** Run this collection by clicking on "Run" or the by using the
+    [Collection
+    Runner](https://learning.postman.com/docs/collections/running-collections/intro-to-collection-runs/).
+
+
+    <img
+    src="https://content.pstmn.io/84019b0f-69c8-4c5f-98b9-2c90a6f9a0b1/Y29sbGVjdGlvbi1ydW5uZXItYnV0dG9uLmpwZWc="
+    width="266" height="103">
+
+
+    **Step 3:** To customize, replace the request URLs with your API endpoints
+    and add or edit the tests if needed.
+  version: 1.0.0
+servers:
+  - url: http://{{baseurl}}
+paths:
+  /admin/sounds:
+    post:
+      tags:
+        - default
+      summary: Create sounds
+      description: Creates sound(s), see example payload and tests for more information.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                data:
+                  - title: New song
+                    bpm: 120
+                    genres:
+                      - pop
+                    duration_in_seconds: 120
+                    credits:
+                      - name: Beyonce
+                        role: VOCALIST
+                      - name: Jay-Z
+                        role: PRODUCER
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /sounds:
+    get:
+      tags:
+        - default
+      summary: Get sounds
+      description: Fetches a list of sounds.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /playlists:
+    post:
+      tags:
+        - default
+      summary: Create playlists
+      description: Creates a new collection of sounds.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                data:
+                  - title: New playlist
+                    sounds:
+                      - '{{soundId}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /sounds/recommended:
+    get:
+      tags:
+        - default
+      summary: Get recommended sounds
+      description: >-
+        Fetches a list of recommended songs. If you run out of time it's ok to
+        return a random sound here, preferably not the same every time.
+      parameters:
+        - name: playlistId
+          in: query
+          schema:
+            type: string
+          example: '{{playlistId}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
