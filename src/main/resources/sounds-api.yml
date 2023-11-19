@@ -114,14 +114,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NewPlaylist'
+              $ref: '#/components/schemas/NewPlaylistRequest'
       responses:
         '200':
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Playlist'
+                $ref: '#/components/schemas/PlaylistResponse'
   /sounds/recommended:
     get:
       summary: Get recommended sounds
@@ -233,7 +233,7 @@ components:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/Sound'
+            $ref: '#/components/schemas/NewPlaylist'
     Playlist:
       type: object
       properties:
@@ -245,4 +245,11 @@ components:
         sounds:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/Sound'
+    PlaylistResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Playlist'

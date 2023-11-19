@@ -1,12 +1,35 @@
 package com.epidemicsound.sounds.services
 
-import com.epidemicsound.openapi.models.NewPlaylist
-import com.epidemicsound.openapi.models.Playlist
+import com.epidemicsound.openapi.models.NewPlaylistRequest
+import com.epidemicsound.openapi.models.PlaylistResponse
+import com.epidemicsound.sounds.entities.PlaylistEntity
+import com.epidemicsound.sounds.repositories.PlaylistRepository
+import com.epidemicsound.sounds.repositories.SoundRepository
+import jakarta.transaction.Transactional
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
 class PlaylistService {
-    fun createPlaylist(newPlaylist: NewPlaylist): Playlist {
-        TODO("Not Implemented")
+
+    @Autowired
+    lateinit var playlistRepository: PlaylistRepository
+
+    @Autowired
+    lateinit var soundRepository: SoundRepository
+
+    @Transactional
+    fun createPlaylist(newPlaylistRequest: NewPlaylistRequest): PlaylistResponse {
+        val playlists = newPlaylistRequest.data!!.map {playlist ->
+            val sounds = playlist.sounds.map { soundId ->
+                soundRepository.findById(soundId.toLong()).get()
+            }
+
+            val savedPlaylist = playlistRepository.save(PlaylistEntity(title = playlist.title, sounds = sounds))
+
+            savedPlaylist.toModel()
+        }
+
+        return PlaylistResponse(playlists)
     }
 }
