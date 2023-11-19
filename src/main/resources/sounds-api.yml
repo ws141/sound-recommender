@@ -86,14 +86,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NewSound'
+              $ref: '#/components/schemas/NewSoundsRequest'
       responses:
         '200':
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Sound'
+                $ref: '#/components/schemas/SoundsResponse'
   /sounds:
     get:
       summary: Get sounds
@@ -104,7 +104,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Sound'
+                $ref: '#/components/schemas/SoundsResponse'
   /playlists:
     post:
       summary: Create playlists
@@ -141,7 +141,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Playlist'
+                $ref: '#/components/schemas/SoundsResponse'
 components:
   schemas:
     NewSound:
@@ -169,6 +169,13 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Credit"
+    NewSoundsRequest:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/NewSound'
     Sound:
       type: object
       properties:
@@ -190,6 +197,13 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Credit"
+    SoundsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sound'
     Credit:
       type: object
       properties:
@@ -213,6 +227,13 @@ components:
           items:
             type: string
           minItems: 1
+    NewPlaylistRequest:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sound'
     Playlist:
       type: object
       properties:
