@@ -20,8 +20,8 @@ class CreditEntity(
     var role: String,
 ) {
     constructor(credit: Credit) : this(
-        name = credit.name!!,
-        role = credit.role!!.name,
+        name = credit.name,
+        role = credit.role.name,
     )
 
     fun toModel() =

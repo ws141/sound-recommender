@@ -16,7 +16,7 @@ class SoundService {
     @Transactional
     fun createSound(newSoundsRequest: NewSoundsRequest): SoundsResponse {
         val sounds =
-            newSoundsRequest.data?.map {
+            newSoundsRequest.data.map {
                 soundRepository.save(SoundEntity(it)).toModel()
             }
 

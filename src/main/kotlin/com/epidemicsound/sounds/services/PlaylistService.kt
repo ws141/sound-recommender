@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service
 
 @Service
 class PlaylistService {
-
     @Autowired
     lateinit var playlistRepository: PlaylistRepository
 
@@ -20,15 +19,14 @@ class PlaylistService {
 
     @Transactional
     fun createPlaylist(newPlaylistRequest: NewPlaylistRequest): PlaylistResponse {
-        val playlists = newPlaylistRequest.data!!.map {playlist ->
-            val sounds = playlist.sounds.map { soundId ->
-                soundRepository.findById(soundId.toLong()).get()
+        val playlists =
+            newPlaylistRequest.data.map { playlist ->
+                val ids = playlist.sounds.map { it.toLong() }
+                val sounds = soundRepository.findByIds(ids)
+                val savedPlaylist = playlistRepository.save(PlaylistEntity(title = playlist.title, sounds = sounds))
+
+                savedPlaylist.toModel()
             }
-
-            val savedPlaylist = playlistRepository.save(PlaylistEntity(title = playlist.title, sounds = sounds))
-
-            savedPlaylist.toModel()
-        }
 
         return PlaylistResponse(playlists)
     }

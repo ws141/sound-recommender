@@ -171,6 +171,8 @@ components:
             $ref: "#/components/schemas/Credit"
     NewSoundsRequest:
       type: object
+      required:
+        - data
       properties:
         data:
           type: array
@@ -178,6 +180,13 @@ components:
             $ref: '#/components/schemas/NewSound'
     Sound:
       type: object
+      required:
+        - soundId
+        - title
+        - bpm
+        - genres
+        - duration_in_seconds
+        - credits
       properties:
         soundId:
           type: string
@@ -199,6 +208,8 @@ components:
             $ref: "#/components/schemas/Credit"
     SoundsResponse:
       type: object
+      required:
+        - data
       properties:
         data:
           type: array
@@ -206,6 +217,9 @@ components:
             $ref: '#/components/schemas/Sound'
     Credit:
       type: object
+      required:
+        - name
+        - role
       properties:
         name:
           type: string
@@ -229,6 +243,8 @@ components:
           minItems: 1
     NewPlaylistRequest:
       type: object
+      required:
+        - data
       properties:
         data:
           type: array
@@ -236,6 +252,10 @@ components:
             $ref: '#/components/schemas/NewPlaylist'
     Playlist:
       type: object
+      required:
+        - playlistId
+        - title
+        - sounds
       properties:
         playlistId:
           type: string
@@ -248,6 +268,8 @@ components:
             $ref: '#/components/schemas/Sound'
     PlaylistResponse:
       type: object
+      required:
+        - data
       properties:
         data:
           type: array
