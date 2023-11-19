@@ -140,7 +140,7 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<packageName>com.epidemicsound.openapi</packageName>
+							<packageName>com.epidemicsound.openapi.server</packageName>
 							<inputSpec>./src/main/resources/sounds-api.yml</inputSpec>
 							<generatorName>kotlin-spring</generatorName>
 							<configOptions>

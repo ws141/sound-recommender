@@ -1,8 +1,8 @@
 package com.epidemicsound.sounds.controllers
 
-import com.epidemicsound.openapi.apis.AdminApi
-import com.epidemicsound.openapi.models.NewSoundsRequest
-import com.epidemicsound.openapi.models.SoundsResponse
+import com.epidemicsound.openapi.server.apis.AdminApi
+import com.epidemicsound.openapi.server.models.NewSoundsRequest
+import com.epidemicsound.openapi.server.models.SoundsResponse
 import com.epidemicsound.sounds.services.SoundService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus

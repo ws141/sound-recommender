@@ -1,7 +1,7 @@
 package com.epidemicsound.sounds.services
 
-import com.epidemicsound.openapi.models.NewSoundsRequest
-import com.epidemicsound.openapi.models.SoundsResponse
+import com.epidemicsound.openapi.server.models.NewSoundsRequest
+import com.epidemicsound.openapi.server.models.SoundsResponse
 import com.epidemicsound.sounds.entities.SoundEntity
 import com.epidemicsound.sounds.repositories.SoundRepository
 import jakarta.transaction.Transactional

@@ -1,7 +1,7 @@
 package com.epidemicsound.sounds.controllers
 
-import com.epidemicsound.openapi.apis.SoundsApi
-import com.epidemicsound.openapi.models.SoundsResponse
+import com.epidemicsound.openapi.server.apis.SoundsApi
+import com.epidemicsound.openapi.server.models.SoundsResponse
 import com.epidemicsound.sounds.services.SoundService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity

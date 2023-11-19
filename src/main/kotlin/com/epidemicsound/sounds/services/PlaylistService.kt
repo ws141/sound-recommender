@@ -1,7 +1,7 @@
 package com.epidemicsound.sounds.services
 
-import com.epidemicsound.openapi.models.NewPlaylistRequest
-import com.epidemicsound.openapi.models.PlaylistResponse
+import com.epidemicsound.openapi.server.models.NewPlaylistRequest
+import com.epidemicsound.openapi.server.models.PlaylistResponse
 import com.epidemicsound.sounds.entities.PlaylistEntity
 import com.epidemicsound.sounds.repositories.PlaylistRepository
 import com.epidemicsound.sounds.repositories.SoundRepository

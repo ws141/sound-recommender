@@ -1,7 +1,7 @@
 package com.epidemicsound.sounds.entities
 
-import com.epidemicsound.openapi.models.NewSound
-import com.epidemicsound.openapi.models.Sound
+import com.epidemicsound.openapi.server.models.NewSound
+import com.epidemicsound.openapi.server.models.Sound
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity

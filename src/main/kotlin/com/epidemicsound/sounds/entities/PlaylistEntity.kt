@@ -1,6 +1,6 @@
 package com.epidemicsound.sounds.entities
 
-import com.epidemicsound.openapi.models.Playlist
+import com.epidemicsound.openapi.server.models.Playlist
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity

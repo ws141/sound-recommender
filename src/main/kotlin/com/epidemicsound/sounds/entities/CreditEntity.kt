@@ -1,6 +1,6 @@
 package com.epidemicsound.sounds.entities
 
-import com.epidemicsound.openapi.models.Credit
+import com.epidemicsound.openapi.server.models.Credit
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
