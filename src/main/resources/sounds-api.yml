@@ -36,7 +36,7 @@ info:
     - POST `/playlists`
 
     - GET `/sounds/recommended`
-        
+
 
     We would also like to see you include **one more end-point of your choice**
     that you think would be relevant for this system.
@@ -59,7 +59,7 @@ info:
     - what each request is meant to do.
 
     - the tests we've added against each one.
-        
+
 
     **Step 2:** Run this collection by clicking on "Run" or the by using the
     [Collection
@@ -75,72 +75,55 @@ info:
     and add or edit the tests if needed.
   version: 1.0.0
 servers:
-  - url: http://{{baseurl}}
+  - url: http://127.0.0.1:8080
 paths:
   /admin/sounds:
     post:
-      tags:
-        - default
       summary: Create sounds
       description: Creates sound(s), see example payload and tests for more information.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
-              type: object
-              example:
-                data:
-                  - title: New song
-                    bpm: 120
-                    genres:
-                      - pop
-                    duration_in_seconds: 120
-                    credits:
-                      - name: Beyonce
-                        role: VOCALIST
-                      - name: Jay-Z
-                        role: PRODUCER
+              $ref: '#/components/schemas/NewSound'
       responses:
         '200':
           description: Successful response
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sound'
   /sounds:
     get:
-      tags:
-        - default
       summary: Get sounds
       description: Fetches a list of sounds.
       responses:
         '200':
           description: Successful response
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sound'
   /playlists:
     post:
-      tags:
-        - default
       summary: Create playlists
       description: Creates a new collection of sounds.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
-              type: object
-              example:
-                data:
-                  - title: New playlist
-                    sounds:
-                      - '{{soundId}}'
+              $ref: '#/components/schemas/NewPlaylist'
       responses:
         '200':
           description: Successful response
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playlist'
   /sounds/recommended:
     get:
-      tags:
-        - default
       summary: Get recommended sounds
       description: >-
         Fetches a list of recommended songs. If you run out of time it's ok to
@@ -148,6 +131,7 @@ paths:
       parameters:
         - name: playlistId
           in: query
+          required: true
           schema:
             type: string
           example: '{{playlistId}}'
@@ -155,4 +139,89 @@ paths:
         '200':
           description: Successful response
           content:
-            application/json: {}
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playlist'
+components:
+  schemas:
+    NewSound:
+      type: object
+      required:
+        - title
+        - bpm
+        - genres
+        - duration_in_seconds
+        - credits
+      properties:
+        title:
+          type: string
+          maxLength: 1024
+        bpm:
+          type: integer
+        genres:
+          type: array
+          items:
+            type: string
+          minItems: 1
+        duration_in_seconds:
+          type: integer
+        credits:
+          type: array
+          items:
+            $ref: "#/components/schemas/Credit"
+    Sound:
+      type: object
+      properties:
+        soundId:
+          type: UUID
+        title:
+          type: string
+          maxLength: 1024
+        bpm:
+          type: integer
+        genres:
+          type: array
+          items:
+            type: string
+          minItems: 1
+        duration_in_seconds:
+          type: integer
+        credits:
+          type: array
+          items:
+            $ref: "#/components/schemas/Credit"
+    Credit:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 1024
+        role:
+          type: string
+          enum: ["VOCALIST", "PRODUCER"]
+    NewPlaylist:
+      type: object
+      required:
+        - title
+        - sounds
+      properties:
+        title:
+          type: string
+          maxLength: 1024
+        sounds:
+          type: array
+          items:
+            type: string
+          minItems: 1
+    Playlist:
+      type: object
+      properties:
+        playlistId:
+          type: UUID
+        title:
+          type: string
+          maxLength: 1024
+        sounds:
+          type: array
+          items:
+            type: string
