@@ -181,14 +181,14 @@ components:
     Sound:
       type: object
       required:
-        - soundId
+        - id
         - title
         - bpm
         - genres
         - duration_in_seconds
         - credits
       properties:
-        soundId:
+        id:
           type: string
         title:
           type: string
@@ -253,11 +253,11 @@ components:
     Playlist:
       type: object
       required:
-        - playlistId
+        - id
         - title
         - sounds
       properties:
-        playlistId:
+        id:
           type: string
         title:
           type: string
