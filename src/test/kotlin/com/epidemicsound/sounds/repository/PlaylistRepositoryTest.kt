@@ -20,14 +20,13 @@ class PlaylistRepositoryTest {
     @Autowired
     lateinit var playlistRepository: PlaylistRepository
 
-
     @Test
     @Transactional
-    fun createPlaylist()  {
+    fun createPlaylist() {
         val sound =
             SoundEntity(
                 NewSound(
-                    "title",
+                    "Title",
                     123,
                     listOf("1", "2"),
                     321,
@@ -44,6 +43,6 @@ class PlaylistRepositoryTest {
         assertEquals(savedList.sounds[0].bpm, saved.bpm)
         assertEquals(savedList.sounds[0].genres, saved.genres)
         assertEquals(savedList.sounds[0].durationInSeconds, saved.durationInSeconds)
+        assertEquals(savedList.sounds[0].credits, saved.credits)
     }
-
 }

@@ -15,14 +15,14 @@ class SoundRepositoryTest {
     lateinit var soundRepository: SoundRepository
 
     @Test
-    fun createSound()  {
+    fun createSound() {
         val sound =
             SoundEntity(
                 NewSound(
-                    "title",
+                    "Title",
                     123,
-                    listOf("1", "2"),
-                    321,
+                    listOf("pop"),
+                    300,
                     listOf(Credit("Beyonce", Credit.Role.vOCALIST)),
                 ),
             )
@@ -33,5 +33,6 @@ class SoundRepositoryTest {
         assertEquals(sound.bpm, saved.bpm)
         assertEquals(sound.genres, saved.genres)
         assertEquals(sound.durationInSeconds, saved.durationInSeconds)
+        assertEquals(sound.credits, saved.credits)
     }
 }

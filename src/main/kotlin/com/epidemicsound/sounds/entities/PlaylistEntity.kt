@@ -19,10 +19,8 @@ class PlaylistEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long = 0,
-
     @Column(name = "title")
     var title: String,
-
     @JoinTable(
         name = "playlist_sounds",
         joinColumns = [JoinColumn(name = "playlist_id")],
@@ -30,13 +28,14 @@ class PlaylistEntity(
     @OneToMany(
         cascade = [CascadeType.PERSIST, CascadeType.MERGE],
         fetch = FetchType.LAZY,
-        targetEntity = SoundEntity::class
+        targetEntity = SoundEntity::class,
     )
-    var sounds: List<SoundEntity>
+    var sounds: List<SoundEntity>,
 ) {
-    fun toModel() = Playlist(
-        this.id.toString(),
-        this.title,
-        this.sounds.map { it.toModel() }
-    )
+    fun toModel() =
+        Playlist(
+            this.id.toString(),
+            this.title,
+            this.sounds.map { it.toModel() },
+        )
 }
