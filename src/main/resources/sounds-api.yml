@@ -180,7 +180,7 @@ components:
       type: object
       properties:
         soundId:
-          type: UUID
+          type: string
         title:
           type: string
           maxLength: 1024
@@ -238,7 +238,7 @@ components:
       type: object
       properties:
         playlistId:
-          type: UUID
+          type: string
         title:
           type: string
           maxLength: 1024
