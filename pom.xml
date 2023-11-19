@@ -34,12 +34,39 @@
 			<groupId>org.jetbrains.kotlin</groupId>
 			<artifactId>kotlin-stdlib</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>jakarta.validation</groupId>
+			<artifactId>jakarta.validation-api</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>2.2.19</version>
+		</dependency>
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-models</artifactId>
+			<version>2.2.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -84,9 +111,15 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<packageName>com.epidemicsound</packageName>
+							<packageName>com.epidemicsound.openapi</packageName>
 							<inputSpec>./src/main/resources/sounds-api.yml</inputSpec>
 							<generatorName>kotlin-spring</generatorName>
+							<configOptions>
+								<useSpringBoot3>true</useSpringBoot3>
+								<interfaceOnly>true</interfaceOnly>
+								<gradleBuildFile>false</gradleBuildFile>
+								<sourceFolder>src/gen/kotlin/main</sourceFolder>
+							</configOptions>
 						</configuration>
 					</execution>
 				</executions>
