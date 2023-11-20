@@ -34,11 +34,11 @@ class SoundService {
 
     fun getRecommended(playlistId: String): SoundsResponse {
         val playlist = playlistRepository.findById(playlistId.toLong()).get()
-
         val distinctGenres = playlist.sounds.flatMap { it.genres }.distinct().toTypedArray()
-        val soundIds = playlist.sounds.map { it.id }.toTypedArray()
+        val credits = playlist.sounds.flatMap { it.credits }.distinct()
+        val names = credits.map { it.name }.distinct()
 
-        val sounds = soundRepository.findRecommended(soundIds, distinctGenres)
+        val sounds = soundRepository.findRecommended(distinctGenres, names)
 
         return SoundsResponse(sounds.map { it.toModel() })
     }

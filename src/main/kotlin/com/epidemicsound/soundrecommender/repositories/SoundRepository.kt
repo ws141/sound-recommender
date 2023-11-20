@@ -10,14 +10,16 @@ import org.springframework.stereotype.Repository
 interface SoundRepository : JpaRepository<SoundEntity, Long> {
     @Query(
         """
-            SELECT * FROM sounds 
+            SELECT DISTINCT s.id, s.title, s.bpm, s.genres, s.duration_in_seconds FROM sounds s
+            JOIN sound_credits sc ON sc.sound_id = s.id
+            JOIN credits c ON sc.credit_id = c.id
             WHERE genres && CAST(:genres AS VARCHAR[])
-            AND id NOT IN :soundIds
+            AND c."name" IN :names
         """,
         nativeQuery = true,
     )
     fun findRecommended(
-        @Param("soundIds") soundIds: Array<Long>,
         @Param("genres") genres: Array<String>,
+        @Param("names") names: List<String>,
     ): List<SoundEntity>
 }

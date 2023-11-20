@@ -36,9 +36,9 @@ class SoundsTest {
                 listOf(
                     NewSound(
                         "Forgot About Dre",
-                        120,
+                        134,
                         listOf("hip-hop"),
-                        300,
+                        222,
                         listOf(
                             Credit("Dr Dre", Credit.Role.pRODUCER),
                             Credit("Dr Dre", Credit.Role.vOCALIST),
@@ -46,19 +46,43 @@ class SoundsTest {
                         ),
                     ),
                     NewSound(
-                        "Put It On",
-                        120,
+                        "Still D.R.E.",
+                        93,
                         listOf("hip-hop"),
-                        300,
+                        271,
+                        listOf(
+                            Credit("Dr Dre", Credit.Role.pRODUCER),
+                            Credit("Dr Dre", Credit.Role.vOCALIST),
+                            Credit("Snoop Dogg", Credit.Role.vOCALIST),
+                        ),
+                    ),
+                    NewSound(
+                        "The Next Episode",
+                        93,
+                        listOf("hip-hop"),
+                        271,
+                        listOf(
+                            Credit("Dr Dre", Credit.Role.pRODUCER),
+                            Credit("Dr Dre", Credit.Role.vOCALIST),
+                            Credit("Snoop Dogg", Credit.Role.vOCALIST),
+                            Credit("Kurupt", Credit.Role.vOCALIST),
+                            Credit("Nate Dogg", Credit.Role.vOCALIST),
+                        ),
+                    ),
+                    NewSound(
+                        "Put It On",
+                        180,
+                        listOf("hip-hop"),
+                        218,
                         listOf(
                             Credit("Big L", Credit.Role.vOCALIST),
                         ),
                     ),
                     NewSound(
                         "All My Life",
-                        120,
+                        168,
                         listOf("rock"),
-                        300,
+                        263,
                         listOf(
                             Credit("Dave Ghrol", Credit.Role.vOCALIST),
                         ),
@@ -132,12 +156,12 @@ class SoundsTest {
             .andExpect(jsonPath("$.data").exists())
             .andExpect(jsonPath("$.data").isArray())
             .andExpect(jsonPath("$.data").isNotEmpty)
-            .andExpect(jsonPath("$.data.length()").value(1))
+            .andExpect(jsonPath("$.data.length()").value(3))
             .andExpect(jsonPath("$.data[0].title").isString)
             .andExpect(jsonPath("$.data[0].title").isNotEmpty)
-            .andExpect(jsonPath("$.data[0].title").value(sound.data[1].title))
+            .andExpect(jsonPath("$.data[0].title").value(sound.data[0].title))
 
-        val playlistUpdatePayload = UpdatePlaylistRequest("Rock", listOf(sound.data[1].id))
+        val playlistUpdatePayload = UpdatePlaylistRequest("Rock", listOf(sound.data[4].id))
 
         mvc.perform(
             patch("/playlists/" + playlist.data[0].id)
@@ -148,7 +172,7 @@ class SoundsTest {
             .andExpect(jsonPath("$.data").exists())
             .andExpect(jsonPath("$.data").isMap)
             .andExpect(jsonPath("$.data.title").value(playlistUpdatePayload.title))
-            .andExpect(jsonPath("$.data.sounds[0].title").value(sound.data[1].title))
+            .andExpect(jsonPath("$.data.sounds[0].title").value(sound.data[4].title))
 
         mvc.perform(
             get("/playlists/" + playlist.data[0].id),
@@ -158,6 +182,6 @@ class SoundsTest {
             .andExpect(jsonPath("$.data").isMap)
             .andExpect(jsonPath("$.data").isNotEmpty)
             .andExpect(jsonPath("$.data.title").value(playlistUpdatePayload.title))
-            .andExpect(jsonPath("$.data.sounds[0].title").value(sound.data[1].title))
+            .andExpect(jsonPath("$.data.sounds[0].title").value(sound.data[4].title))
     }
 }
