@@ -1,11 +1,14 @@
 # Sound recommender
 
-### Built with
+### Tools
 
+* Java 17
+* Kotlin 1.8.22
 * Maven
 * Spring Boot in Kotlin
-* Postgresql with Testcontainers (docker required)
-* Api generated from OpenApi specification
+* Formatted with ktlint 1.0.0
+* Postgres 16 with Testcontainers (docker required)
+* API generated from OpenApi specification
 
 ### Run application
 #### Maven
