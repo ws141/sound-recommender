@@ -33,6 +33,11 @@ class PlaylistEntity(
     )
     var sounds: List<SoundEntity>,
 ) {
+    constructor() : this(
+        title = "",
+        sounds = emptyList(),
+    )
+
     fun toModel() =
         Playlist(
             this.id.toString(),

@@ -5,6 +5,7 @@ import com.epidemicsound.openapi.client.models.NewPlaylist
 import com.epidemicsound.openapi.client.models.NewPlaylistRequest
 import com.epidemicsound.openapi.client.models.NewSound
 import com.epidemicsound.openapi.client.models.NewSoundsRequest
+import com.epidemicsound.openapi.client.models.PlaylistResponse
 import com.epidemicsound.openapi.client.models.SoundsResponse
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.junit.jupiter.api.Test
@@ -40,6 +41,24 @@ class SoundsTest {
                             Credit("Dr Dre", Credit.Role.pRODUCER),
                             Credit("Dr Dre", Credit.Role.vOCALIST),
                             Credit("Eminem", Credit.Role.vOCALIST),
+                        ),
+                    ),
+                    NewSound(
+                        "Put It On",
+                        120,
+                        listOf("hip-hop"),
+                        300,
+                        listOf(
+                            Credit("Big L", Credit.Role.vOCALIST),
+                        ),
+                    ),
+                    NewSound(
+                        "All My Life",
+                        120,
+                        listOf("rock"),
+                        300,
+                        listOf(
+                            Credit("Dave Ghrol", Credit.Role.vOCALIST),
                         ),
                     ),
                 ),
@@ -83,21 +102,37 @@ class SoundsTest {
                 listOf(
                     NewPlaylist(
                         "Hip-Hop",
-                        sound.data.map { it.id },
+                        listOf(sound.data[0].id, sound.data[2].id),
                     ),
                 ),
             )
 
+        val playlistResult =
+            mvc.perform(
+                post("/playlists")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(mapper.writeValueAsString(playlistPayload)),
+            )
+                .andExpect(status().isCreated)
+                .andExpect(jsonPath("$.data").exists())
+                .andExpect(jsonPath("$.data").isArray())
+                .andExpect(jsonPath("$.data").isNotEmpty)
+                .andExpect(jsonPath("$.data[0].title").isString)
+                .andExpect(jsonPath("$.data[0].title").isNotEmpty)
+                .andReturn()
+
+        val playlist = mapper.readValue(playlistResult.response.contentAsString, PlaylistResponse::class.java)
+
         mvc.perform(
-            post("/playlists")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(mapper.writeValueAsString(playlistPayload)),
-        )
-            .andExpect(status().isCreated)
+            get("/sounds/recommended")
+                .queryParam("playlistId", playlist.data[0].id),
+        ).andExpect(status().isOk)
             .andExpect(jsonPath("$.data").exists())
             .andExpect(jsonPath("$.data").isArray())
             .andExpect(jsonPath("$.data").isNotEmpty)
+            .andExpect(jsonPath("$.data.length()").value(1))
             .andExpect(jsonPath("$.data[0].title").isString)
             .andExpect(jsonPath("$.data[0].title").isNotEmpty)
+            .andExpect(jsonPath("$.data[0].title").value(sound.data[1].title))
     }
 }
