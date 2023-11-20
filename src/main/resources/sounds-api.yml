@@ -117,7 +117,49 @@ paths:
               $ref: '#/components/schemas/NewPlaylistRequest'
       responses:
         '201':
-          description: Playlist created
+          description: Playlists created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaylistsResponse'
+  /playlists/{id}:
+    get:
+      summary: Get playlist
+      description: Returns specific playlist.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Playlist updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaylistResponse'
+    patch:
+      summary: Update playlist
+      description: Allows for updating of the playlist.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Updated playlists parameters
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePlaylistRequest'
+      responses:
+        '200':
+          description: Playlist updated
           content:
             application/json:
               schema:
@@ -266,7 +308,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Sound'
-    PlaylistResponse:
+    PlaylistsResponse:
       type: object
       required:
         - data
@@ -275,3 +317,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Playlist'
+    PlaylistResponse:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          $ref: '#/components/schemas/Playlist'
+    UpdatePlaylistRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          maxLength: 1024
+        sounds:
+          type: array
+          items:
+            type: string
+          minItems: 1
+

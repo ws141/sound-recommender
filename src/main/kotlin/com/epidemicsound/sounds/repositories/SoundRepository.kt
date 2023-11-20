@@ -8,8 +8,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface SoundRepository : JpaRepository<SoundEntity, Long> {
-    // fun findByGenresIn(genres: Set<String>) : List<SoundEntity>
-
     @Query(
         """
             SELECT * FROM sounds 

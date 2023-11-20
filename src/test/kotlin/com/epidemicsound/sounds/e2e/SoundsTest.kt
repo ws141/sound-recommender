@@ -5,8 +5,9 @@ import com.epidemicsound.openapi.client.models.NewPlaylist
 import com.epidemicsound.openapi.client.models.NewPlaylistRequest
 import com.epidemicsound.openapi.client.models.NewSound
 import com.epidemicsound.openapi.client.models.NewSoundsRequest
-import com.epidemicsound.openapi.client.models.PlaylistResponse
+import com.epidemicsound.openapi.client.models.PlaylistsResponse
 import com.epidemicsound.openapi.client.models.SoundsResponse
+import com.epidemicsound.openapi.client.models.UpdatePlaylistRequest
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
@@ -28,7 +30,7 @@ class SoundsTest {
     private val mapper = jacksonObjectMapper()
 
     @Test
-    fun createSound() {
+    fun soundFlow() {
         val soundsPayload =
             NewSoundsRequest(
                 listOf(
@@ -121,7 +123,7 @@ class SoundsTest {
                 .andExpect(jsonPath("$.data[0].title").isNotEmpty)
                 .andReturn()
 
-        val playlist = mapper.readValue(playlistResult.response.contentAsString, PlaylistResponse::class.java)
+        val playlist = mapper.readValue(playlistResult.response.contentAsString, PlaylistsResponse::class.java)
 
         mvc.perform(
             get("/sounds/recommended")
@@ -134,5 +136,28 @@ class SoundsTest {
             .andExpect(jsonPath("$.data[0].title").isString)
             .andExpect(jsonPath("$.data[0].title").isNotEmpty)
             .andExpect(jsonPath("$.data[0].title").value(sound.data[1].title))
+
+        val playlistUpdatePayload = UpdatePlaylistRequest("Rock", listOf(sound.data[1].id))
+
+        mvc.perform(
+            patch("/playlists/" + playlist.data[0].id)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(playlistUpdatePayload)),
+        )
+            .andExpect(status().isOk)
+            .andExpect(jsonPath("$.data").exists())
+            .andExpect(jsonPath("$.data").isMap)
+            .andExpect(jsonPath("$.data.title").value(playlistUpdatePayload.title))
+            .andExpect(jsonPath("$.data.sounds[0].title").value(sound.data[1].title))
+
+        mvc.perform(
+            get("/playlists/" + playlist.data[0].id),
+        )
+            .andExpect(status().isOk)
+            .andExpect(jsonPath("$.data").exists())
+            .andExpect(jsonPath("$.data").isMap)
+            .andExpect(jsonPath("$.data").isNotEmpty)
+            .andExpect(jsonPath("$.data.title").value(playlistUpdatePayload.title))
+            .andExpect(jsonPath("$.data.sounds[0].title").value(sound.data[1].title))
     }
 }
