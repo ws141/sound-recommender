@@ -1,13 +1,13 @@
-package com.epidemicsound.sounds.e2e
+package com.epidemicsound.soundrecommender.e2e
 
-import com.epidemicsound.openapi.client.models.Credit
-import com.epidemicsound.openapi.client.models.NewPlaylist
-import com.epidemicsound.openapi.client.models.NewPlaylistRequest
-import com.epidemicsound.openapi.client.models.NewSound
-import com.epidemicsound.openapi.client.models.NewSoundsRequest
-import com.epidemicsound.openapi.client.models.PlaylistsResponse
-import com.epidemicsound.openapi.client.models.SoundsResponse
-import com.epidemicsound.openapi.client.models.UpdatePlaylistRequest
+import com.epidemicsound.soundrecommender.openapi.client.models.Credit
+import com.epidemicsound.soundrecommender.openapi.client.models.NewPlaylist
+import com.epidemicsound.soundrecommender.openapi.client.models.NewPlaylistRequest
+import com.epidemicsound.soundrecommender.openapi.client.models.NewSound
+import com.epidemicsound.soundrecommender.openapi.client.models.NewSoundsRequest
+import com.epidemicsound.soundrecommender.openapi.client.models.PlaylistsResponse
+import com.epidemicsound.soundrecommender.openapi.client.models.SoundsResponse
+import com.epidemicsound.soundrecommender.openapi.client.models.UpdatePlaylistRequest
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

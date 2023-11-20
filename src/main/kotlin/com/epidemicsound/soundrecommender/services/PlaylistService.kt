@@ -1,12 +1,12 @@
-package com.epidemicsound.sounds.services
+package com.epidemicsound.soundrecommender.services
 
-import com.epidemicsound.openapi.server.models.NewPlaylistRequest
-import com.epidemicsound.openapi.server.models.PlaylistResponse
-import com.epidemicsound.openapi.server.models.PlaylistsResponse
-import com.epidemicsound.openapi.server.models.UpdatePlaylistRequest
-import com.epidemicsound.sounds.entities.PlaylistEntity
-import com.epidemicsound.sounds.repositories.PlaylistRepository
-import com.epidemicsound.sounds.repositories.SoundRepository
+import com.epidemicsound.soundrecommender.entities.PlaylistEntity
+import com.epidemicsound.soundrecommender.openapi.server.models.NewPlaylistRequest
+import com.epidemicsound.soundrecommender.openapi.server.models.PlaylistResponse
+import com.epidemicsound.soundrecommender.openapi.server.models.PlaylistsResponse
+import com.epidemicsound.soundrecommender.openapi.server.models.UpdatePlaylistRequest
+import com.epidemicsound.soundrecommender.repositories.PlaylistRepository
+import com.epidemicsound.soundrecommender.repositories.SoundRepository
 import jakarta.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service

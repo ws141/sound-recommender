@@ -1,6 +1,6 @@
-package com.epidemicsound.sounds.repositories
+package com.epidemicsound.soundrecommender.repositories
 
-import com.epidemicsound.sounds.entities.PlaylistEntity
+import com.epidemicsound.soundrecommender.entities.PlaylistEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

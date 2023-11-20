@@ -1,8 +1,8 @@
-package com.epidemicsound.sounds.controllers
+package com.epidemicsound.soundrecommender.controllers
 
-import com.epidemicsound.openapi.server.apis.SoundsApi
-import com.epidemicsound.openapi.server.models.SoundsResponse
-import com.epidemicsound.sounds.services.SoundService
+import com.epidemicsound.soundrecommender.openapi.server.apis.SoundsApi
+import com.epidemicsound.soundrecommender.openapi.server.models.SoundsResponse
+import com.epidemicsound.soundrecommender.services.SoundService
 import jakarta.transaction.Transactional
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity

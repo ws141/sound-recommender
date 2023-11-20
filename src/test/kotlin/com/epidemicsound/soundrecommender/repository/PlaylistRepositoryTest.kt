@@ -1,11 +1,11 @@
-package com.epidemicsound.sounds.repository
+package com.epidemicsound.soundrecommender.repository
 
-import com.epidemicsound.openapi.server.models.Credit
-import com.epidemicsound.openapi.server.models.NewSound
-import com.epidemicsound.sounds.entities.PlaylistEntity
-import com.epidemicsound.sounds.entities.SoundEntity
-import com.epidemicsound.sounds.repositories.PlaylistRepository
-import com.epidemicsound.sounds.repositories.SoundRepository
+import com.epidemicsound.soundrecommender.entities.PlaylistEntity
+import com.epidemicsound.soundrecommender.entities.SoundEntity
+import com.epidemicsound.soundrecommender.openapi.server.models.Credit
+import com.epidemicsound.soundrecommender.openapi.server.models.NewSound
+import com.epidemicsound.soundrecommender.repositories.PlaylistRepository
+import com.epidemicsound.soundrecommender.repositories.SoundRepository
 import jakarta.transaction.Transactional
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test

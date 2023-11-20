@@ -1,4 +1,4 @@
-package com.epidemicsound.sounds
+package com.epidemicsound.soundrecommender
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class SoundsApplication
 
 fun main(args: Array<String>) {
-	runApplication<SoundsApplication>(*args)
+    runApplication<SoundsApplication>(*args)
 }

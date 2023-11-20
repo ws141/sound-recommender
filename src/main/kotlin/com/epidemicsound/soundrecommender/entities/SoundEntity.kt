@@ -1,7 +1,7 @@
-package com.epidemicsound.sounds.entities
+package com.epidemicsound.soundrecommender.entities
 
-import com.epidemicsound.openapi.server.models.NewSound
-import com.epidemicsound.openapi.server.models.Sound
+import com.epidemicsound.soundrecommender.openapi.server.models.NewSound
+import com.epidemicsound.soundrecommender.openapi.server.models.Sound
 import com.vladmihalcea.hibernate.type.array.ListArrayType
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Column

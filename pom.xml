@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.epidemicsound</groupId>
-	<artifactId>sounds</artifactId>
+	<artifactId>sound-recommender</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>sounds</name>
-	<description>Sounds management</description>
+	<name>sound-recommender</name>
+	<description>Sound recommender</description>
 	<properties>
 		<java.version>17</java.version>
 		<kotlin.version>1.8.22</kotlin.version>
@@ -95,7 +95,6 @@
 			<scope>compile</scope>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -146,7 +145,7 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<packageName>com.epidemicsound.openapi.server</packageName>
+							<packageName>com.epidemicsound.soundrecommender.openapi.server</packageName>
 							<inputSpec>./src/main/resources/sounds-api.yml</inputSpec>
 							<generatorName>kotlin-spring</generatorName>
 							<configOptions>
@@ -163,7 +162,7 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<packageName>com.epidemicsound.openapi.client</packageName>
+							<packageName>com.epidemicsound.soundrecommender.openapi.client</packageName>
 							<inputSpec>./src/main/resources/sounds-api.yml</inputSpec>
 							<generatorName>kotlin</generatorName>
 							<configOptions>
