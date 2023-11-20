@@ -8,8 +8,14 @@
 * Api generated from OpenApi specification
 
 ### Run application
-
+#### Maven
 `./mvnw spring-boot:run`
+
+#### IntelliJ IDEA
+Make sure to compile with maven first by running `./mvnw clean compile` and mark `target/generated-sources` directory as "Sources Root" by right clicking the folder
+and choosing `'Mark Directory as' -> 'Soures Root'`
+
+Then run `main` function in `SoundRecommenderApplication`
 
 ### Tests
 
