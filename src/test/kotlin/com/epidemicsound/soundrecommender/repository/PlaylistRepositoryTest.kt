@@ -1,5 +1,6 @@
 package com.epidemicsound.soundrecommender.repository
 
+import com.epidemicsound.soundrecommender.BaseDbTest
 import com.epidemicsound.soundrecommender.entities.PlaylistEntity
 import com.epidemicsound.soundrecommender.entities.SoundEntity
 import com.epidemicsound.soundrecommender.openapi.server.models.Credit
@@ -13,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class PlaylistRepositoryTest {
+class PlaylistRepositoryTest : BaseDbTest() {
     @Autowired
     lateinit var soundRepository: SoundRepository
 

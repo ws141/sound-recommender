@@ -1,5 +1,6 @@
 package com.epidemicsound.soundrecommender.e2e
 
+import com.epidemicsound.soundrecommender.BaseDbTest
 import com.epidemicsound.soundrecommender.openapi.client.models.Credit
 import com.epidemicsound.soundrecommender.openapi.client.models.NewPlaylist
 import com.epidemicsound.soundrecommender.openapi.client.models.NewPlaylistRequest
@@ -23,7 +24,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class SoundsTest {
+class SoundsTest : BaseDbTest() {
     @Autowired
     lateinit var mvc: MockMvc
 

@@ -1,3 +1,5 @@
 spring:
   datasource:
     url: jdbc:tc:postgresql:15:///
+  flyway:
+    cleanDisabled: false
