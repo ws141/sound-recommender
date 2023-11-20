@@ -5,6 +5,7 @@ import com.epidemicsound.openapi.server.models.NewPlaylistRequest
 import com.epidemicsound.openapi.server.models.PlaylistResponse
 import com.epidemicsound.sounds.services.PlaylistService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
 
@@ -14,6 +15,6 @@ class PlaylistsController : PlaylistsApi {
     private lateinit var playlistService: PlaylistService
 
     override fun playlistsPost(newPlaylistRequest: NewPlaylistRequest): ResponseEntity<PlaylistResponse> {
-        return ResponseEntity.ok(playlistService.createPlaylist(newPlaylistRequest))
+        return ResponseEntity(playlistService.createPlaylist(newPlaylistRequest), HttpStatus.CREATED)
     }
 }

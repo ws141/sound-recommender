@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service
 @Service
 class SoundService {
     @Autowired
-    lateinit var soundRepository: SoundRepository
+    private lateinit var soundRepository: SoundRepository
 
     @Transactional
     fun createSound(newSoundsRequest: NewSoundsRequest): SoundsResponse {

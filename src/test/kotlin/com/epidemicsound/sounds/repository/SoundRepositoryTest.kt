@@ -1,7 +1,7 @@
 package com.epidemicsound.sounds.repository
 
-import com.epidemicsound.openapi.models.Credit
-import com.epidemicsound.openapi.models.NewSound
+import com.epidemicsound.openapi.server.models.Credit
+import com.epidemicsound.openapi.server.models.NewSound
 import com.epidemicsound.sounds.entities.SoundEntity
 import com.epidemicsound.sounds.repositories.SoundRepository
 import org.junit.jupiter.api.Assertions.assertEquals

@@ -24,6 +24,7 @@ class PlaylistEntity(
     @JoinTable(
         name = "playlist_sounds",
         joinColumns = [JoinColumn(name = "playlist_id")],
+        inverseJoinColumns = [JoinColumn(name = "sound_id")],
     )
     @OneToMany(
         cascade = [CascadeType.PERSIST, CascadeType.MERGE],

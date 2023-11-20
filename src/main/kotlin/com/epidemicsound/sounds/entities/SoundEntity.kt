@@ -2,6 +2,7 @@ package com.epidemicsound.sounds.entities
 
 import com.epidemicsound.openapi.server.models.NewSound
 import com.epidemicsound.openapi.server.models.Sound
+import com.vladmihalcea.hibernate.type.array.ListArrayType
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -13,6 +14,7 @@ import jakarta.persistence.JoinColumn
 import jakarta.persistence.JoinTable
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
+import org.hibernate.annotations.Type
 
 @Entity(name = "sound")
 @Table(name = "sounds")
@@ -24,13 +26,15 @@ class SoundEntity(
     var title: String,
     @Column(name = "bpm")
     var bpm: Int,
-    @Column(name = "genres")
+    @Type(ListArrayType::class)
+    @Column(name = "genres", columnDefinition = "varchar[]")
     var genres: List<String>,
     @Column(name = "duration_in_seconds")
     var durationInSeconds: Int,
     @JoinTable(
         name = "sound_credits",
         joinColumns = [JoinColumn(name = "sound_id")],
+        inverseJoinColumns = [JoinColumn(name = "credit_id")],
     )
     @OneToMany(
         cascade = [CascadeType.PERSIST, CascadeType.MERGE],
@@ -39,6 +43,13 @@ class SoundEntity(
     )
     var credits: List<CreditEntity>,
 ) {
+    constructor() : this (
+        title = "",
+        bpm = 0,
+        genres = emptyList(),
+        durationInSeconds = 0,
+        credits = emptyList(),
+    )
     constructor(newSound: NewSound) : this (
         title = newSound.title,
         bpm = newSound.bpm,

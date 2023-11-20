@@ -19,6 +19,10 @@ class CreditEntity(
     @Column(name = "role")
     var role: String,
 ) {
+    constructor() : this(
+        name = "",
+        role = "",
+    )
     constructor(credit: Credit) : this(
         name = credit.name,
         role = credit.role.name,
